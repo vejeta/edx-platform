@@ -216,11 +216,11 @@ define([
 
 
           it('Navigates to tabs properly', function() {
-              var $navbtn = $(dataDownload.$navButton[1]);
-              var selectedSection = '#' + $navbtn.attr('data-section');
-              $navbtn.trigger('click');
+              var $tabSwitch = $(dataDownload.$tabSwitch[1]);
+              var selectedSection = '#' + $tabSwitch.attr('data-section');
+              $tabSwitch.trigger('click');
               expect($(selectedSection).is(':visible')).toBe(true);
-              expect($navbtn.hasClass('active-section')).toBe(true);
+              expect($tabSwitch.hasClass('active-section')).toBe(true);
           });
       });
   });

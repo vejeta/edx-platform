@@ -38,7 +38,6 @@ DATA_DOWNLOAD_V2 = CourseWaffleFlag(
 # .. toggle_warnings: n/a
 # .. toggle_tickets: PROD-1740
 # .. toggle_status: supported
-
 OPTIMISED_IS_SMALL_COURSE = WaffleFlag(
     waffle_namespace=WAFFLE_FLAG_NAMESPACE,
     flag_name='optimised_is_small_course',

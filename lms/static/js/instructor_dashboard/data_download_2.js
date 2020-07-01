@@ -1,4 +1,4 @@
-/* globals _, DataDonwload, PendingInstructorTasks, ReportDownloads */
+/* globals _, DataDownloadV2, PendingInstructorTasks, ReportDownloads */
 
 (function() {
     'use strict';
@@ -36,8 +36,8 @@
             this.$selection_informations = $('.selectionInfo');
             this.$certificate_display_table = $('.certificate-data-display-table');
             this.$downloadProblemReport = $('#download-problem-report');
-            this.$navButton = $('.data-download-nav .btn-link');
-            this.$selectedSection = $('#' + this.$navButton.first().attr('data-section'));
+            this.$tabSwitch = $('.data-download-nav .btn-link');
+            this.$selectedSection = $('#' + this.$tabSwitch.first().attr('data-section'));
             this.$learnerStatus = $('.learner-status');
 
             this.clear_display = function() {
@@ -57,7 +57,7 @@
 
             this.clear_display();
 
-            this.$navButton.click(function(event) {
+            this.$tabSwitch.click(function(event) {
                 var selectedSection = '#' + $(this).attr('data-section');
                 event.preventDefault();
                 $('.data-download-nav .btn-link').removeClass('active-section');
@@ -71,7 +71,7 @@
                 dataDownloadObj.clear_display();
             });
 
-            this.$navButton.first().click();
+            this.$tabSwitch.first().click();
 
             this.$report_type_selector.change(function() {
                 var selectedOption = dataDownloadObj.$report_type_selector.val();

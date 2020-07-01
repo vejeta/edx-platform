@@ -1,0 +1,29 @@
+<%page args="section_data" expression_filter="h"/>
+<%namespace name='static' file='/static_content.html'/>
+<%!
+from django.utils.translation import ugettext as _
+from openedx.core.djangolib.markup import HTML, Text
+%>
+
+<section id="certificate" class="idash-section tab-data" aria-labelledby="header-cert">
+        <h6 class="mb-15" id="header-cert">
+            <strong>${_("NOTE")}: </strong>
+            Please select the report type and then click Download Report button
+        </h6>
+
+        <select class="report-type selector">
+            <option value="viewCertificates" data-csv="false"
+                    data-endpoint="${ section_data['get_issued_certificates_url'] }">View certificates
+            </option>
+            <option value="downloadCertificates" data-csv="true"
+                    data-endpoint="${ section_data['get_issued_certificates_url'] }">Download csv of
+                certificates
+            </option>
+        </select>
+        <button  class="mb-20 btn-brand download-report ml-10" type="button" value="download report">Download
+            report
+        </button>
+        <div>
+            <p>${_("Click to list certificates that are issued for this course:")}</p>
+        </div>
+</section>

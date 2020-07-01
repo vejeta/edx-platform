@@ -141,10 +141,10 @@ class TestInstructorDashboard(ModuleStoreTestCase, LoginEnrollmentTestCase, XssT
         ('instructor', False, False),
         ('data_researcher', True, False),
         ('global_staff', True, False),
-        ('staff', False, False),
-        ('instructor', False, False),
-        ('data_researcher', True, False),
-        ('global_staff', True, False),
+        ('staff', False, True),
+        ('instructor', False, True),
+        ('data_researcher', True, True),
+        ('global_staff', True, True),
     )
     @ddt.unpack
     def test_data_download(self, access_role, can_access, waffle_status):

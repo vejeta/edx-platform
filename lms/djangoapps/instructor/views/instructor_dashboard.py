@@ -105,7 +105,7 @@ def show_analytics_dashboard_message(course_key):
 
 
 @ensure_csrf_cookie
-@cache_control(no_cache=False, no_store=False, must_revalidate=False)
+@cache_control(no_cache=True, no_store=True, must_revalidate=True)
 def instructor_dashboard_2(request, course_id):
     """ Display the instructor dashboard for a course. """
     try:
@@ -630,7 +630,7 @@ def _section_data_download(course, access):
         settings.FEATURES.get('ENABLE_SPECIAL_EXAMS', False) and
         course.enable_proctored_exams
     )
-    section_key = 'data_download_2' if data_download_v2_is_enabled() else 'data_download'
+    section_key = 'data_download_2' if data_download_v2_is_enabled(course_key) else 'data_download'
     section_data = {
         'section_key': section_key,
         'section_display_name': _('Data Download'),

@@ -25,39 +25,39 @@
             <div class="mb-5">
                 <select class="report-type selector">
                     <option value="gradingConfiguration"
-                            data-endpoint="${ section_data['get_grading_config_url'] }">
+                            data-endpoint="">
                         Grading Configuration
                     </option>
-                    <option value="listAnonymizeStudentIDs" data-endpoint="${ section_data['get_anon_ids_url'] }"
-                            class="${'is-disabled' if disable_buttons else ''}"
-                            aria-disabled="${'true' if disable_buttons else 'false'}">Anonymized Student IDs
+                    <option value="listAnonymizeStudentIDs" data-endpoint=""
+                            class=""
+                            aria-disabled="">Anonymized Student IDs
                     </option>
                     <option value="profileInformation"
-                            data-endpoint="${ section_data['get_students_features_url'] }"
+                            data-endpoint=""
                             data-csv="true">Profile Information
                     </option>
                     <option value="learnerWhoCanEnroll"
-                            data-endpoint="${ section_data['get_students_who_may_enroll_url'] }" data-csv="true">
+                            data-endpoint="" data-csv="true">
                         Learner
                         who can enroll
                     </option>
                     <option value="listEnrolledPeople"
-                            data-endpoint="${ section_data['get_students_features_url'] }">
+                            data-endpoint="">
                         List enrolled students profile information
                     </option>
                     <option value="proctoredExamResults"
-                            data-endpoint="${ section_data['list_proctored_results_url'] }">Proctored exam results
+                            data-endpoint="">Proctored exam results
                     </option>
                     <option value="surveyResultReport"
-                            data-endpoint="${ section_data['course_survey_results_url'] }">
+                            data-endpoint="">
                         Survey Result report
                     </option>
                     <option value="ORADataReport" data-graderelated="true"
-                            data-endpoint="${ section_data['export_ora2_data_url'] }">ORA Data
+                            data-endpoint="">ORA Data
                         report
                     </option>
                     <option data-graderelated="true" value="problemGradeReport"
-                    data-endpoint="${ section_data['problem_grade_report_url'] }">Problem Grade report
+                    data-endpoint="">Problem Grade report
                     </option>
                 </select>
                 <button class="btn-brand download-report" type="button" value="download report">Download
@@ -110,10 +110,10 @@
 
         <select class="report-type selector">
             <option value="viewCertificates" data-csv="false"
-                    data-endpoint="${ section_data['get_issued_certificates_url'] }">View certificates
+                    data-endpoint="">View certificates
             </option>
             <option value="downloadCertificates" data-csv="true"
-                    data-endpoint="${ section_data['get_issued_certificates_url'] }">Download csv of
+                    data-endpoint="">Download csv of
                 certificates
             </option>
         </select>
@@ -140,7 +140,7 @@
             }
             )}
         </div>
-        <button data-endpoint="${ section_data['get_problem_responses_url'] }" id="download-problem-report"
+        <button data-endpoint="" id="download-problem-report"
                 class="btn-brand mb-20" type="button" value="download report">Download
             report
         </button>
@@ -150,7 +150,6 @@
             "responses, try generating the report on a chapter-by-chapter, or problem-by-problem basis, or contact "
             "your site administrator to increase the limit.").format(max_entries=max_entries)}
         </p>
-        %endif
     </section>
     <section id="grading" class="idash-section tab-data" aria-labelledby="header-grading">
         <h6 class="mb-15" id="header-grading">
@@ -167,7 +166,7 @@
 
         <button class="mb-20 btn-brand grade-report-download" type="button"
                 value="download report"
-                data-endpoint="${ section_data['calculate_grades_csv_url'] }">Download Report
+                data-endpoint="">Download Report
         </button>
         <div>
             <p>${_("Click to generate a CSV grade report for all currently enrolled students.")}</p>
@@ -209,7 +208,7 @@
     </p><br>
 
     <div class="report-downloads-table" id="report-downloads-table"
-         data-endpoint="${ section_data['list_report_downloads_url'] }"></div>
+         data-endpoint=""></div>
 
 </div>
 <div id="data_download_2" class="running-tasks-container action-type-container">
@@ -218,7 +217,7 @@
     <div class="running-tasks-section">
         <p>${_("The status for any active tasks appears in a table below.")} </p>
         <br/>
-        <div class="running-tasks-table" data-endpoint="${ section_data['list_instructor_tasks_url'] }"></div>
+        <div class="running-tasks-table" data-endpoint=""></div>
     </div>
     <div class="no-pending-tasks-message"></div>
 </div>
