@@ -37,9 +37,6 @@ django-storages<1.9
 # Support was dropped for Python 3.5
 drf-yasg<1.17.1
 
-# drf-jwt 1.15.0 contains a migration that breaks on MySQL: https://github.com/Styria-Digital/django-rest-framework-jwt/issues/40
-drf-jwt==1.14.0
-
 # Tests are failing with 3.2.2: https://build.testeng.edx.org/job/edx-platform-python-pipeline-pr/19138/
 edx-completion==3.2.1
 
