@@ -101,7 +101,7 @@ class ProgressTabView(RetrieveAPIView):
             'courseware_summary': courseware_summary,
         }
         context = self.get_serializer_context()
-        context['staff_access'] = request.user.is_staff
+        context['staff_access'] = bool(has_access(request.user, 'staff', course))
         serializer = self.get_serializer_class()(data, context=context)
 
         return Response(serializer.data)
