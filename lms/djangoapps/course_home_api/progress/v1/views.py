@@ -12,7 +12,6 @@ from opaque_keys.edx.keys import CourseKey
 from lms.djangoapps.course_home_api.progress.v1.serializers import ProgressTabSerializer
 
 from student.models import CourseEnrollment, UserTestGroup
-# from common.djangoapps.student.models import CourseEnrollment
 from lms.djangoapps.course_api.blocks.transformers.blocks_api import BlocksAPITransformer
 from lms.djangoapps.courseware.courses import get_course_with_access
 from lms.djangoapps.courseware.masquerade import setup_masquerade
@@ -21,7 +20,7 @@ from xmodule.modulestore.django import modulestore
 
 from lms.djangoapps.course_blocks.api import get_course_blocks
 import lms.djangoapps.course_blocks.api as course_blocks_api
-# from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
+from lms.djangoapps.grades.api import CourseGradeFactory
 from openedx.core.djangoapps.content.block_structure.transformers import BlockStructureTransformers
 
 
@@ -88,17 +87,21 @@ class ProgressTabView(RetrieveAPIView):
         transformers += [
             BlocksAPITransformer(None, None, depth=3),
         ]
-        _ = get_course_with_access(request.user, 'load', course_key, check_if_enrolled=True)
+        course = get_course_with_access(request.user, 'load', course_key, check_if_enrolled=True)
         course_blocks = get_course_blocks(request.user, course_usage_key, transformers, include_completion=True)
 
         enrollment_mode, _ = CourseEnrollment.enrollment_mode_for_user(request.user, course_key)
 
+        course_grade = CourseGradeFactory().read(request.user, course)
+        courseware_summary = list(course_grade.chapter_grades.values())
+
         data = {
-            'user': request.user,
             'course_blocks': course_blocks,
             'enrollment_mode': enrollment_mode,
+            'courseware_summary': courseware_summary,
         }
-
-        serializer = self.get_serializer(data)
+        context = self.get_serializer_context()
+        context['staff_access'] = request.user.is_staff
+        serializer = self.get_serializer_class()(data, context=context)
 
         return Response(serializer.data)
