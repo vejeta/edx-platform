@@ -34,7 +34,7 @@
             this.$gradeReportDownload = $('.grade-report-download');
             this.$report_type_selector = $('.report-type');
             this.$selection_informations = $('.selectionInfo');
-            this.$certificate_display_table = $('.certificate-data-display-table');
+            this.$data_display_table = $('.data-display-table-holder');
             this.$downloadProblemReport = $('#download-problem-report');
             this.$tabSwitch = $('.data-download-nav .btn-link');
             this.$selectedSection = $('#' + this.$tabSwitch.first().attr('data-section'));
@@ -59,7 +59,7 @@
                 this.$download_request_response_error.empty();
                 this.$reports_request_response.empty();
                 this.$reports_request_response_error.empty();
-                this.$certificate_display_table.empty();
+                this.$data_display_table.empty();
                 $('.msg-confirm').css({
                     display: 'none'
                 });
@@ -94,11 +94,11 @@
              */
             this.$report_type_selector.change(function() {
                 var selectedOption = dataDownloadObj.$report_type_selector.val();
-                dataDownloadObj.$selection_informations.each(function(index, ele) {
-                    if ($(ele).hasClass(selectedOption)) {
-                        $(ele).show();
+                dataDownloadObj.$selection_informations.each(function(index, elem) {
+                    if ($(elem).hasClass(selectedOption)) {
+                        $(elem).show();
                     } else {
-                        $(ele).hide();
+                        $(elem).hide();
                     }
                 });
                 dataDownloadObj.clear_display();
@@ -133,7 +133,7 @@
             this.renderDataTable = function(selected, errorMessage) {
                 var url = selected.data('endpoint');
                 dataDownloadObj.clear_display();
-                dataDownloadObj.$certificate_display_table.text(gettext('Loading data...'));
+                dataDownloadObj.$data_display_table.text(gettext('Loading data...'));
                 return $.ajax({
                     type: 'POST',
                     url: url,
