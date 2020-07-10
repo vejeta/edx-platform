@@ -6,13 +6,13 @@ from openedx.core.djangolib.markup import HTML, Text
 %>
 
 <section id="reports" class="idash-section tab-data" aria-labelledby="header-reports">
-        <h6 class="mb-15" id="header-reports">
-            <strong>${_("NOTE")}: </strong>
-            Please select the report type and then click Download Report button
+        <h6  class="mb-15 font-size-100" id="header-reports">
+            <strong>${_("Note")}: </strong>
+            Please select the report type and then click "Download Report" button
         </h6>
         <div class="mb-15">
 
-            <div class="mb-5">
+            <div class="">
                 <select class="report-type selector">
                     <option value="gradingConfiguration"
                             data-endpoint="${ section_data['get_grading_config_url'] }">
@@ -61,9 +61,7 @@ from openedx.core.djangolib.markup import HTML, Text
                     %endif
                     %endif
                 </select>
-                <button class="btn-brand download-report ml-10" type="button" value="download report">Download
-                    report
-                </button>
+                <input type="button" value="Download Report" class="download-report ml-10">
             </div>
 
         </div>

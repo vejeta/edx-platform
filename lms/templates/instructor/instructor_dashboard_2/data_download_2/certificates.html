@@ -6,8 +6,8 @@ from openedx.core.djangolib.markup import HTML, Text
 %>
 
 <section id="certificate" class="idash-section tab-data" aria-labelledby="header-cert">
-        <h6 class="mb-15" id="header-cert">
-            <strong>${_("NOTE")}: </strong>
+        <h6 class="mb-15 font-size-100" id="header-cert">
+            <strong>${_("Note")}: </strong>
             Please select the report type and then click Download Report button
         </h6>
 
@@ -23,9 +23,12 @@ from openedx.core.djangolib.markup import HTML, Text
                 certificates
             </option>
         </select>
-        <button  class="mb-20 btn-brand download-report ml-10" type="button" value="download report">Download
-            report
-        </button>
+<!--        <button  class="mb-20 btn-brand download-report ml-10" type="button" value="download report">Download-->
+<!--            report-->
+<!--        </button>-->
+            <input type="button"
+                   value="Download Report"
+                   class="mb-20 download-report">
         <div>
             <p>${_("Click to list certificates that are issued for this course:")}</p>
         </div>

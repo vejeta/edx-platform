@@ -7,9 +7,9 @@ from openedx.core.djangolib.markup import HTML, Text
 
 %if settings.FEATURES.get('ALLOW_COURSE_STAFF_GRADE_DOWNLOADS') or section_data['access']['admin']:
 <section id="grading" class="idash-section tab-data" aria-labelledby="header-grading">
-    <h6 class="mb-15" id="header-grading">
-        <strong>${_("NOTE")}: </strong>
-        Please select learner status and then click Download Report button to download Course Grade Report
+    <h6 class="mb-15 font-size-100" id="header-grading">
+        <strong>${_("Note")}: </strong>
+        Please select learner status and then click "Download Course Grade Report" button
     </h6>
     <br>
 
@@ -19,10 +19,10 @@ from openedx.core.djangolib.markup import HTML, Text
         <option value="false">All Learners</option>
     </select>
 
-    <button class="mb-20 btn-brand grade-report-download ml-10" type="button"
-            value="download report"
-            data-endpoint="${ section_data['calculate_grades_csv_url'] }">Download Report
-    </button>
+    <input data-endpoint="${ section_data['calculate_grades_csv_url'] }"
+       type="button"
+       value="Download Course Grade Report"
+       class="mb-20 grade-report-download">
     <div>
         <p>${_("Click to generate a CSV grade report for all currently enrolled students.")}</p>
     </div>
