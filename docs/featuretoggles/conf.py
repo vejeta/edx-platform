@@ -19,6 +19,7 @@ sys.path.append(os.path.abspath('extensions'))
 extensions = ["featuretoggles"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+autodoc_mock_imports = ["xmlsec"]
 
 # -- Options for HTML output -------------------------------------------------
 
