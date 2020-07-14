@@ -141,11 +141,12 @@ from student.models import CourseEnrollment
 <section class="dashboard" id="dashboard-main">
 <main class="main-container" id="main" aria-label="Content" tabindex="-1">
   <%
-    MB_SLUG = "microbachelors"
-    enrolled_in_mb_program = MB_SLUG in enrolled_program_types
+    from openedx.core.djangoapps.demographics.api.status import show_user_demographics
+    show_demographics = show_user_demographics(user)
+    demographics_enabled = getattr(settings, 'ENABLE_DEMOGRAPHICS_COLLECTION', False)
     account_mfe_url = getattr(settings, 'ACCOUNT_MICROFRONTEND_URL', '') or ''
   %>
-  % if getattr(settings, 'ENABLE_DEMOGRAPHICS_COLLECTION', False) and enrolled_in_mb_program:
+  % if demographics_enabled and show_demographics:
     <a href="${account_mfe_url}#demographics">
       <div
         class="demographics-banner d-flex justify-content-left align-items-center flex-column flex-lg-row py-1 px-4 mb-2 mb-lg-4">
