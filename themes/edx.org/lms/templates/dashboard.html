@@ -142,11 +142,11 @@ from student.models import CourseEnrollment
 <main class="main-container" id="main" aria-label="Content" tabindex="-1">
   <%
     from openedx.core.djangoapps.demographics.api.status import show_user_demographics
-    show_demographics = show_user_demographics(user)
     demographics_enabled = getattr(settings, 'ENABLE_DEMOGRAPHICS_COLLECTION', False)
+    display_demographics_banner = demographics_enabled and show_user_demographics(user)
     account_mfe_url = getattr(settings, 'ACCOUNT_MICROFRONTEND_URL', '') or ''
   %>
-  % if demographics_enabled and show_demographics:
+  % if display_demographics_banner:
     <a href="${account_mfe_url}#demographics">
       <div
         class="demographics-banner d-flex justify-content-left align-items-center flex-column flex-lg-row py-1 px-4 mb-2 mb-lg-4">
