@@ -5,6 +5,7 @@ from tempfile import NamedTemporaryFile
 
 import six
 from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from testfixtures import LogCapture
 
@@ -14,6 +15,8 @@ from student.models import CourseEnrollment
 from student.tests.factories import UserFactory
 from xmodule.modulestore.tests.django_utils import SharedModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory
+
+from common.djangoapps.student.models import BulkUpdatenrollmentConfiguration
 
 LOGGER_NAME = 'student.management.commands.bulk_change_enrollment_csv'
 
@@ -115,6 +118,22 @@ class BulkChangeEnrollmentCSVTests(SharedModuleStoreTestCase):
         with NamedTemporaryFile() as csv:
             csv = self._write_test_csv(csv, lines=lines)
             call_command("bulk_change_enrollment_csv", "--csv_file_path={}".format(csv.name))
+
+        for enrollment in self.enrollments:
+            new_enrollment = CourseEnrollment.get_enrollment(user=enrollment.user, course_key=enrollment.course)
+            self.assertEqual(new_enrollment.is_active, True)
+            self.assertEqual(new_enrollment.mode, CourseMode.VERIFIED)
+
+    @unittest.skipUnless(settings.ROOT_URLCONF == 'lms.urls', 'Test only valid in lms')
+    def test_bulk_enrollment_from_config_model(self):
+        """ Test all users are enrolled using the config model."""
+        lines = "course_id,user,mode\n"
+        for enrollment in self.enrollments:
+            str(enrollment.course.id) + "," + str(enrollment.user.username) + ",verified\n"
+
+        csv_file = SimpleUploadedFile(name='test.csv', content=lines.encode('utf-8'), content_type='text/csv')
+        BulkUpdatenrollmentConfiguration.objects.create(enabled=True, csv_file=csv_file)
+        call_command("bulk_change_enrollment_csv")
 
         for enrollment in self.enrollments:
             new_enrollment = CourseEnrollment.get_enrollment(user=enrollment.user, course_key=enrollment.course)

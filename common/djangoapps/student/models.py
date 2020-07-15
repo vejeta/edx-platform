@@ -2917,6 +2917,18 @@ class BulkUnenrollConfiguration(ConfigurationModel):
     )
 
 
+class BulkUpdatenrollmentConfiguration(ConfigurationModel):
+    """
+
+    """
+    csv_file = models.FileField(
+        validators=[FileExtensionValidator(allowed_extensions=[u'csv'])],
+        help_text=_(u"It expect that the data will be provided in a csv file format with \
+                    first row being the header and columns will be as follows: \
+                    course_id, mode, username")
+    )
+
+
 @python_2_unicode_compatible
 class UserAttribute(TimeStampedModel):
     """

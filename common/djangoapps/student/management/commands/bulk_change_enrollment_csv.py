@@ -15,6 +15,8 @@ from opaque_keys.edx.keys import CourseKey
 
 from student.models import CourseEnrollment, CourseEnrollmentAttribute, User
 
+from common.djangoapps.student.models import BulkUpdatenrollmentConfiguration
+
 logger = logging.getLogger('student.management.commands.bulk_change_enrollment_csv')
 
 
@@ -42,7 +44,7 @@ class Command(BaseCommand):
         """ Add argument to the command parser. """
         parser.add_argument(
             '--csv_file_path',
-            required=True,
+            required=False,
             help='Csv file path'
         )
 
@@ -50,10 +52,19 @@ class Command(BaseCommand):
         """ Main handler for the command."""
         file_path = options['csv_file_path']
 
-        if not path.isfile(file_path):
-            raise CommandError("File not found.")
+        if file_path:
+            if not path.isfile(file_path):
+                raise CommandError("File not found.")
 
-        with open(file_path) as csv_file:
+            with open(file_path) as csv_file:
+                self.change_enrollment(csv_file)
+
+        else:
+
+            csv_file = BulkUpdatenrollmentConfiguration.current().csv_file
+            self.change_enrollment(csv_file)
+
+    def change_enrollment(self, csv_file):
             course_key = None
             user = None
             file_reader = csv.DictReader(csv_file)
